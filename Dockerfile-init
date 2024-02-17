@@ -1,0 +1,13 @@
+FROM ubuntu:latest
+
+# Create a group with ID 1002
+RUN groupadd -g 1002 group1002
+
+# Create a user with ID 1002 and add it to the group
+RUN useradd -u 1002 -g group1002 user1002
+
+COPY entrypoint-init.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Define the entrypoint
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]

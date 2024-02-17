@@ -1,0 +1,22 @@
+
+volumes:
+  data:
+
+services:
+  init:
+    image: ${COMPOSE_PROJECT_NAME}-init
+    # build:
+    #   context: ./
+    #   dockerfile: Dockerfile-init
+    #command: chown 1002:1002 -R /data
+    volumes:
+      - data:/data
+  app:
+    image: ${COMPOSE_PROJECT_NAME}-app
+    # build:
+    #   context: ./
+    depends_on:
+      - init
+    #command: tail -f /dev/null
+    volumes:
+      - data:/data
